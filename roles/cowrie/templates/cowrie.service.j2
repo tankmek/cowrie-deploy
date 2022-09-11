@@ -1,0 +1,22 @@
+[Unit]
+Description=SSH Honeypot Service
+After=network.target
+
+[Service]
+User={{ honeypot.user }}
+Group={{ honeypot.group }}
+
+Restart=always
+RestartSec=5
+
+Environment=PYTHONPATH={{ honeypot.hmdir }}/{{ cowrie.dir }}/src
+WorkingDirectory={{ honeypot.hmdir }}/{{ cowrie.dir }}
+
+ExecStart={{ honeypot.hmdir }}/{{ cowrie.dir }}//{{ cowrie.venv }}/bin/python {{ honeypot.hmdir }}/{{ cowrie.dir }}/{{ cowrie.venv }}/bin/twisted --umask 0022 --nodaemon --pidfile= -l - cowrie
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=cowrie
+
+[Install]
+WantedBy=multi-user.target
