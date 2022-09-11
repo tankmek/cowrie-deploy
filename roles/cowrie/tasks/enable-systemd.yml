@@ -1,0 +1,19 @@
+---
+- block:
+  - name: Apply Systemd Unit File Template to Remote System(s)
+    ansible.builtin.template:
+      src: "cowrie.service.j2"
+      dest: "{{ cowrie.systemd_path }}/cowrie.service"
+      mode: 0644
+    notify: "Restart cowrie"
+
+  - name: Enable Cowrie Systemd Service
+    systemd:
+      name: cowrie
+      daemon_reload: yes
+      enabled: yes
+    notify: "Restart cowrie"
+
+  when:
+      - cowrie.use_systemd|default(false)|bool
+...
