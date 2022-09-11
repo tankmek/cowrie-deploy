@@ -7,10 +7,6 @@
       mode: 0644
     notify: "Reload systemd"
 
-  # Handler reload may be buffered until the end of the last task
-  - name: Force systemd reload
-    meta: flush_handlers
-
   - name: Enable Cowrie Systemd Service
     systemd:
       name: cowrie
