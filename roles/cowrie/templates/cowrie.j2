@@ -1,0 +1,64 @@
+[honeypot]
+sensor_name = {{ cowrie.cfg.sensor_name }}
+hostname = {{ cowrie.cfg.hostname }}
+download_limit_size = {{ cowrie.cfg.download_limit_size }}
+ttylog = true
+interactive_timeout = {{ cowrie.cfg.idle_timeout }}
+authentication_timeout = {{ cowrie.cfg.auth_timeout }}
+timezone = {{ cowrie.cfg.timezone }}
+auth_class = {{ cowrie.cfg.auth_class }}
+auth_class_paramters = {{ cowrie.cfg.auth_class_params }}
+
+[shell]
+arch = {{ cowrie.cfg.arch }}
+kernel_version = {{ cowrie.cfg.shell.kernel_version }}
+ssh_version = {{ cowrie.cfg.shell.ssh_version }}
+
+[ssh]
+enabled = {{ cowrie.cfg.ssh.enable }}
+version = {{ cowrie.cfg.ssh.version }}
+sftp_enabled = {{ cowrie.cfg.ssh.sftp_enable }}
+
+[output_jsonlog]
+enabled = {{ cowrie.cfg.enable_jsonlog }}
+
+[output_s3]
+enabled = {{ cowrie.cfg.s3.enable }}
+access_key_id = {{ cowrie.cfg.s3.access_key }}
+secret_access_key = {{ cowrie.cfg.s3.secret_key }}
+bucket = {{ cowrie.cfg.s3.bucket }}
+region = {{ cowrie.cfg.s3.region }}
+
+[output_reversedns]
+enabled = {{ cowrie.cfg.enable_reversedns }}
+timeout = {{ cowrie.cfg.dns_timeout }}
+
+[output_misp]
+enabled = {{ cowrie.cfg.misp.enable }}
+base_url = {{ cowrie.cfg.misp.base_url }}
+api_key = {{ cowrie.cfg.misp.api_key }}
+verify_cert = {{ cowrie.cfg.misp.verify_cert }}
+publish_event = {{ cowrie.cfg.misp.publish_event }}
+debug = false
+
+[output_telegram]
+enabled = {{ cowrie.cfg.telegram.enable }}
+bot_token = {{ cowrie.cfg.telegram.bot_token }}
+chat_id = {{ cowrie.cfg.telegram.chat_id }}
+
+[output_crashreporter]
+enabled = {{ cowrie.cfg.enable_crashreporter }}
+debug = false
+
+[output_abuseipdb]
+enabled = {{ cowrie.cfg.enable_abuseipdb }}
+
+[output_discord]
+enabled = {{ cowrie.cfg.discord.enable }}
+url = {{ cowrie.cfg.discord.webhook }}
+
+[output_virustotal]
+enabled = {{ cowrie.cfg.vt.enable }}
+api_key = {{ cowrie.cfg.vt.api_key }}
+upload = {{ cowrie.cfg.vt.upload }}
+scan_file = {{ cowrie.cfg.vt.scan_file }}

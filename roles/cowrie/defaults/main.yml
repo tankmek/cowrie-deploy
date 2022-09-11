@@ -1,0 +1,78 @@
+---
+#--------------------
+# Default variables for the cowrie role 
+##-------------------
+sensor:
+  ssh_port: 1984
+
+cowrie:
+  ssh_port: 2222
+  # Git repo url
+  repo: "https://github.com/cowrie/cowrie.git"
+  dir: "cowrie"
+  venv: "cowrie-env"
+  custom_fs: "fs.pickle"
+  cfg:
+    # name for host
+    sensor_name: "beer"
+    # name attackers will see
+    hostname: "aws-web4"
+    download_limit_size: 0
+    # default is 180
+    idle_timeout: 300
+    auth_timeout: 300
+    timezone: "UTC"
+    auth_class: "AuthRandom"
+    auth_class_params: "3, 10, 15"
+    arch: ""
+    shell:
+      kernel_version: "3.15.0-158-generic"
+      ssh_version: "OpenSSH_7.9p1, OpenSSL 1.4.1a 20 Jul 2019"
+    ssh:
+      enable: true
+      version: "SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.10"
+      sftp_enable: true
+    enable_jsonlog: true
+    enable_s3upload: false
+    s3:
+      enable: false
+      access_key: ""
+      secret_key: ""
+      bucket: ""
+      region: ""
+    enable_reversedns: false
+    dns_timeout: 3
+    # MISP output settings
+    misp:
+      enable: false
+      base_url: ""
+      api_key: ""
+      verify_cert: ""
+      publish_event: ""
+    telegram:
+      enable: false
+      bot_token: ""
+      chat_id: 1234567
+    enable_crashreporter: true
+    enable_abuseipdb: false
+    discord:
+      enable: false
+      webhook: ""
+    vt:
+      enable: false
+      api_key: ""
+      upload: false
+      scan_file: true
+
+pkg:
+  virtualenv: "python3-virtualenv" 
+  # Debian specific dependencies
+  debian_venv: "python3-venv"
+  debian_acl: "acl"
+  debian_sudo: "sudo"
+
+honeypot:
+  user: "cowrie"
+  group: "cowrie"
+  hmdir: "/home/cowrie"
+

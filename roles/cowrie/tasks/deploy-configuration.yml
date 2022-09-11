@@ -1,0 +1,11 @@
+---
+# 
+- block:
+  - name: Copy Templated Config to Target System(s)
+    ansible.builtin.template:
+      src: "cowrie.j2"
+      dest: "{{ honeypot.hmdir }}/{{ cowrie.dir }}/etc/cowrie.cfg"
+
+  become: true
+  become_user: "{{ honeypot.user }}"
+...

@@ -1,0 +1,8 @@
+---
+# 
+- name: Create Cowrie Honeypot User
+  ansible.builtin.user:
+    name: "{{ honeypot.user }}"
+    state: present
+    password_lock: yes
+...

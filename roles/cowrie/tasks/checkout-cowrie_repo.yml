@@ -1,0 +1,11 @@
+---
+# Clone repo if not present. Will not update repo.
+- name: Checkout Cowrie Repo
+  ansible.builtin.git:
+    repo: "{{ cowrie.repo }}"
+    dest: "{{ honeypot.hmdir }}/cowrie"
+    update: no
+
+  become: true
+  become_user: "{{ honeypot.user }}"
+...

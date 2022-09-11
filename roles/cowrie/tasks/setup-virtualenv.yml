@@ -1,0 +1,21 @@
+# These tasks need to be done as the honeypot user
+- block: 
+
+  - name: Check Prequisite Virtual Environment Modules
+    ansible.builtin.pip:
+      name:
+        - pip>20
+      virtualenv: "{{ honeypot.hmdir }}/{{ cowrie.dir }}/{{ cowrie.venv }}"
+      virtualenv_command: /usr/bin/python3 -m venv
+      state: latest
+
+  - name: Check requirements.txt dependencies in venv
+    ansible.builtin.pip:
+      requirements: "{{ honeypot.hmdir }}/{{ cowrie.dir }}/requirements.txt"
+      virtualenv: "{{ honeypot.hmdir }}/{{ cowrie.dir }}/{{ cowrie.venv }}"
+      virtualenv_command: /usr/bin/python3 -m venv
+      state: present
+
+  become: true
+  become_user: "{{ honeypot.user }}"
+...

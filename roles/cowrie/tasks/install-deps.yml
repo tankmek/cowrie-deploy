@@ -1,0 +1,31 @@
+---
+# Install dependencies
+- block:
+  - name: Install Git
+    ansible.builtin.package:
+      name: git
+      state: present
+
+  - name: Install Python3 Virtualenv
+    ansible.builtin.package:
+      name: "{{ pkg.virtualenv }}"
+      state: present
+
+  - name: Install Additional Debian Venv Package
+    ansible.builtin.package:
+      name: "{{ pkg.debian_venv }}"
+      state: present
+    when: ansible_distribution == 'Debian'
+
+  - name: Install ACL package
+    ansible.builtin.package:
+      name: "{{ pkg.debian_acl }}"
+      state: present
+    when: ansible_distribution == 'Debian'
+
+  - name: Install sudo package
+    ansible.builtin.package:
+      name: "{{ pkg.debian_sudo }}"
+      state: present
+    when: ansible_distribution == 'Debian'
+...

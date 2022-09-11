@@ -1,0 +1,9 @@
+---
+# 
+- include_tasks: install-deps.yml
+- include_tasks: create-user.yml
+- include_tasks: checkout-cowrie_repo.yml
+- include_tasks: setup-virtualenv.yml
+- include_tasks: deploy-configuration.yml
+- include_tasks: upload-pickle_fs.yml
+...
