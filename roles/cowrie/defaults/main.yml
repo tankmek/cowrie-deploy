@@ -22,8 +22,9 @@ cowrie:
   # By default cowrie is not configured to use systemd. You can decide here
   # if you want that enabled and also configure the appropirate path with
   # no leading slash.
-  enable_systemd: false
-  systemd_path: "/etc/systemd/system"
+  systemd:
+    enable: true
+    unit_path: "/etc/systemd/system"
   cfg:
     # Sensor name is used to identify this Cowrie instance.
     sensor_name: "beer"
