@@ -99,8 +99,9 @@ cowrie:
       chat_id: 1234567
     # The crashreporter sends data on Python exceptions to api.cowrie.org
     enable_crashreporter: true
-   # Reports login attempts to AbuseIPDB.
-    enable_abuseipdb: false
+    # Reports login attempts to AbuseIPDB.
+    abuseipdb:
+      enable: false
       api_key: ""
       rereport_after:  24
       #tolerance_window is in minutes
