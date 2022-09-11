@@ -5,7 +5,11 @@
       src: "cowrie.service.j2"
       dest: "{{ cowrie.systemd_path }}/cowrie.service"
       mode: 0644
-    notify: "Restart cowrie"
+    notify: "Reload systemd"
+
+  # Handler reload may be buffered until the end of the last task
+  - name: Force systemd reload
+    meta: flush_handlers
 
   - name: Enable Cowrie Systemd Service
     systemd:
