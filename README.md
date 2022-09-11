@@ -20,7 +20,7 @@ The descriptions and defaults for all these variables can be found in the **defa
 
 | Name | Description |
 | ---- | ----------- |
-| **[`main.yml`](https://github.com/tankmek/cowrie-splunk-deploy/group_vars/honeypots/cowrie.yml)** | Cowrie Honeypot variables |
+| **[`main.yml`](https://github.com/tankmek/cowrie-deploy/blob/main/roles/cowrie/defaults/main.yml)** | Cowrie Honeypot variables |
 
 # Notes
 Debian systems need python3-venv and python3-virtualenv
