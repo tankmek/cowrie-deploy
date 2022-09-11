@@ -1,8 +1,12 @@
 ---
 #--------------------
 # Default variables for the cowrie role 
+# Most comments taken from cowrie official documentation.
+# 
 ##-------------------
 sensor:
+  # ssh port for host system. This is the port
+  # you will connect when managing the honeypot
   ssh_port: 1984
 
 cowrie:
@@ -10,60 +14,109 @@ cowrie:
   # Git repo url
   repo: "https://github.com/cowrie/cowrie.git"
   dir: "cowrie"
+  # cowrie virtual environment directory name
   venv: "cowrie-env"
+  # If you have a custom filesystem pickle, wire the name below and
+  # place the picke in teh cowrie role files directory. Otherwise leave blank.
   custom_fs: "fs.pickle"
+  # By default cowrie is not configured to use systemd. You can decide here
+  # if you want that enabled and also configure the appropirate path with
+  # no leading slash.
+  enable_systemd: false
+  systemd_path: "/etc/systemd/system"
   cfg:
-    # name for host
+    # Sensor name is used to identify this Cowrie instance.
     sensor_name: "beer"
-    # name attackers will see
+    # Hostname for the honeypot. Displayed by the shell prompt of the virtual
+    # environment
     hostname: "aws-web4"
+    # Maximum file size (in bytes) for downloaded files.
+    # A value of 0 means no limit. (default: 0)
     download_limit_size: 0
-    # default is 180
+    # Interactive timeout determines when logged in sessions are
+    # terminated for being idle. In seconds.
+    # cowrie default is 180.
     idle_timeout: 300
+    # The server disconnects after this time if the user has not successfully
+    # logged in.  If the value is 0, there is no time limit.
+    # The cowrie default is 120 seconds.
     auth_timeout: 300
+    # Timezone Cowrie uses for logging
     timezone: "UTC"
+    # Default is the 'UserDB' class which uses the password database.
+    # Alternatively the 'AuthRandom' class can be used, which will let
+    # a user login after a random number of attempts.
+    # It will also cache username/password combinations that allow login.
     auth_class: "AuthRandom"
+    # When AuthRandom is used also set the
+    #  auth_class_parameters: <min try>, <max try>, <maxcache>
+    #  for example: 2, 5, 10 = allows access after randint(2,5) attempts
+    #  and cache 10 combinations.
     auth_class_params: "3, 10, 15"
-    arch: ""
     shell:
+      # Fake architectures/OS
+      arch: "linux-x64-lsb"
+      # Modify the response of '/bin/uname'
       kernel_version: "3.15.0-158-generic"
+      # SSH Version as printed by "ssh -V" in shell emulation
       ssh_version: "OpenSSH_7.9p1, OpenSSL 1.4.1a 20 Jul 2019"
     ssh:
       enable: true
+      # SSH version string as present to the client.
+      # Version string MUST start with SSH-2.0- or SSH-1.99-
+      # Use these to disguise your honeypot from a simple SSH version scan
+      # (default: "SSH-2.0-OpenSSH_6.0p1 Debian-4+deb7u2")
       version: "SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.10"
       sftp_enable: true
-    enable_jsonlog: true
-    enable_s3upload: false
+    # JSON output logging
+    json_log:
+      enable: true
+    # Upload files that cowrie has captured to an S3 (or compatible bucket)
+    # Files are stored with a name that is the SHA of their contents
     s3:
       enable: false
+      # These should be stored using ansible_vault
       access_key: ""
       secret_key: ""
+      # The bucket to store the files in. The bucket must already exist.
       bucket: ""
       region: ""
+    # Perform Reverse DNS lookup
     enable_reversedns: false
+    # timeout in seconds (default: 3)
     dns_timeout: 3
-    # MISP output settings
+    # Upload all files to a MISP instance 
     misp:
       enable: false
       base_url: ""
       api_key: ""
       verify_cert: ""
       publish_event: ""
+    # Telegram output variables
     telegram:
       enable: false
       bot_token: ""
       chat_id: 1234567
+    # The crashreporter sends data on Python exceptions to api.cowrie.org
     enable_crashreporter: true
+   # Reports login attempts to AbuseIPDB.
     enable_abuseipdb: false
+      api_key: ""
+      rereport_after:  24
+      #tolerance_window is in minutes
+      tolerance_window: 120
+      tolerance_attempts: 10
     discord:
       enable: false
       webhook: ""
+    # Virus Total. Requires API key
     vt:
       enable: false
       api_key: ""
       upload: false
       scan_file: true
-
+# Package names vary across distributions. Use this to
+# adjust the name based on which system you are using
 pkg:
   virtualenv: "python3-virtualenv" 
   # Debian specific dependencies
