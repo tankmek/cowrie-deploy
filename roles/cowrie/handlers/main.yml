@@ -1,3 +1,9 @@
 ---
 # handlers file for cowrie honeypot
-
+- name: Restart cowrie
+  ansible.builtin.systemd:
+    name: cowrie
+    daemon_reload: yes
+    state: restarted
+  listen: "Restart cowrie"
+...
